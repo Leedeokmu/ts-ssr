@@ -1,19 +1,12 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {addAge, subAge} from "./index";
-import {connect} from "react-redux"
+import store from "./store";
+import {observer} from "mobx-react";
 
-interface AppProps {
-    age: number;
-    onAddClick(): void;
-    onSubClick(): void;
-}
-
-class App extends Component<AppProps, {}> {
-
+@observer
+class App extends Component<{}, {}> {
     render() {
-        const {age, onAddClick, onSubClick} = this.props;
         return (
             <div className="App">
                 <header className="App-header">
@@ -21,35 +14,14 @@ class App extends Component<AppProps, {}> {
                     <p>
                         Edit <code>src/App.tsx</code> and save to reload.
                     </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >Learn</a>
-                    <p>{age}</p>
-                    <button onClick={onAddClick}>an year passed...</button>
-                    <button onClick={onSubClick}>last year...</button>
+                    <p>
+                        {store.age}
+                        <button onClick={() => store.addAge()}>한해가 지나갔다.</button>
+                    </p>
                 </header>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: {age: number}) => {
-    return {
-        age: state.age
-    }
-}
-
-const mapDispatchToProps = (dispatch: Function) => {
-    return {
-        onAddClick: () => dispatch(addAge()),
-        onSubClick: () => dispatch(subAge())
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App);
+export default App;
