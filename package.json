@@ -12,14 +12,12 @@
     "@types/redux": "^3.6.0",
     "@types/redux-actions": "^2.6.1",
     "mobx": "^5.14.0",
-    "mobx-react": "^6.1.4",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.2",
-    "redux": "^4.0.4",
-    "redux-actions": "^2.6.5",
+    "ts-jest": "^24.1.0",
     "typescript": "3.6.3"
   },
   "scripts": {
