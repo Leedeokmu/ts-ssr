@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import store from "./store";
-import {observer} from "mobx-react";
+import {inject, observer} from "mobx-react";
+import TodoStore from "./stores/todoStore"
+import TodoList from "./components/TodoList";
+import TodoInput from "./components/TodoInput";
 
+interface AppProps {
+    todoStore?: TodoStore;
+}
+
+@inject('todoStore')
 @observer
-class App extends Component<{}, {}> {
+class App extends Component<AppProps, {}> {
     render() {
+        const store = this.props.todoStore as TodoStore;
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to reload.
-                    </p>
-                    <p>
-                        {store.age}
-                        <button onClick={() => store.addAge()}>한해가 지나갔다.</button>
-                    </p>
-                </header>
-            </div>
+            <>
+                <TodoInput addTodo={store.addTodo}/>
+                <TodoList todos={store.todos}/>
+            </>
         );
     }
 }
